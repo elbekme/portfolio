@@ -1,8 +1,7 @@
 import { Fragment, useEffect } from "react"
 import { Table, Space, Button, Modal, Form, Input } from 'antd';
-import { addSkill, controlModal, editSkill, getSkill, getSkills, putSkill, showModal } from "../../redux/slices/skillSlice";
+import { addSkill, controlModal, editSkill, getSkill, getSkills, showModal, updateSkill,deleteSkill } from "../../redux/slices/skillSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteSkill } from "../../redux/slices/skillSlice";
 
 const SkillsPage = () => {
   const dispatch = useDispatch();
@@ -30,10 +29,11 @@ const SkillsPage = () => {
       render: (_, row) => {
         return (
           <Space size="middle">
-            <Button type="primary" onClick={async () =>{ await dispatch(editSkill({id: row.id}))
-            await dispatch(getSkills());
+            <Button type="primary" onClick={async () => { 
+              await dispatch(editSkill(row._id));
+              await dispatch(getSkills());
             let {payload} = await dispatch(getSkill(row._id));
-            form.setFieldValue(payload);
+            form.setFieldsValue(payload);
             }}>
               Edit
             </Button>
@@ -61,7 +61,7 @@ const SkillsPage = () => {
       if(selected === null){
         await dispatch(addSkill(values));
       }else{
-        await dispatch(putSkill({id: selected, values}));
+        await dispatch(updateSkill({id: selected, values}));
       }
       closeModal();
       await dispatch(getSkills());

@@ -1,19 +1,25 @@
 import { message } from "antd";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom"; 
+import { useDispatch } from "react-redux";
+
 import { TOKEN } from "../../constants";
+import { controlAuthenticated } from "../../redux/slices/authSlice";
 import request from "../../server";
+import '../front/front_style/home.scss';
+
 
 const HomePage = () => {
     const navigate = useNavigate();
-    
+    const dispatch = useDispatch();
+
     const login = async () =>{
         try{
         let user = {username:'abdulaziz', password:'12345'};
         let {data} = await request.post('auth/login', user);
-        console.log(data);
         if(data.user.role === 'admin'){
             navigate('/dashboard');
+            dispatch(controlAuthenticated(true));
             message.success('you are admin !');
             Cookies.set(TOKEN, data.token);
         }else{
@@ -25,8 +31,11 @@ const HomePage = () => {
     };
 
   return (
-    <div>
-        <button onClick={login}>Login</button>
+    <div className="container">
+        <div className="home">
+            <h1>Hover Me</h1>
+                <button onClick={login}>Login</button>
+        </div>
     </div>
   )
 }
