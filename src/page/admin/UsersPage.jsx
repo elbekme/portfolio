@@ -31,9 +31,9 @@ const UsersPage = () => {
       key: "lastName",
     },
     {
-        title: "Role",
-        dataIndex: "role",
-        key: "role",
+        title: "Username",
+        dataIndex: "username",
+        key: "username",
       },
     {
       title: "Action",
@@ -167,8 +167,8 @@ const UsersPage = () => {
             <Input/>
           </Form.Item>
           <Form.Item
-            label="Role"
-            name="role"
+            label="User name"
+            name="username"
             rules={[
               {
                 required: true,
@@ -178,7 +178,18 @@ const UsersPage = () => {
           >
             <Input/>
           </Form.Item>
-          
+          <Form.Item
+            label="password"
+            name="password"
+            rules={[
+              {
+                required: true,
+                message: "Please fill!",
+              },
+            ]}
+          >
+            <Input/>
+          </Form.Item>
         </Form>
       </Modal>
     </Fragment>
