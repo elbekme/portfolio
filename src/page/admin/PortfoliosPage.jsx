@@ -56,6 +56,8 @@ const PortfoliosPage = () => {
 
     const openModal = () =>{
         setIsModalOpen(true);
+        setSelected(null);
+        form.resetFields();
     }
     const closeModal = () =>{
         setIsModalOpen(false);

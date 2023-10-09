@@ -3,7 +3,7 @@ import { ENDPOINT, TOKEN } from '../../constants';
 import Cookies from "js-cookie"; 
 
 export const userService = createApi({
-    reducerPath: "users",
+    reducerPath: "user",
     baseQuery:  fetchBaseQuery({ baseUrl: `${ENDPOINT}api/v1/`,
     prepareHeaders: (headers) => {
         headers.set("Authorization", `Bearer ${Cookies.get(TOKEN)}`);
@@ -48,9 +48,9 @@ export const userService = createApi({
 export const {
     useGetUsersQuery,
     useGetUserMutation,
-    useAddUsersMutation,
-    useUpdateUsersMutation,
-    useDeleteUsersMutation,
+    useAddUserMutation,
+    useUpdateUserMutation,
+    useDeleteUserMutation,
 } = userService;
 
 export default userService.reducer;
