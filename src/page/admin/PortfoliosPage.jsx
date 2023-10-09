@@ -61,9 +61,6 @@ const PortfoliosPage = () => {
         setIsModalOpen(false);
     }
 
-
-
-
     const handleOk = async () => {
       try {
         let values = await form.validateFields();
