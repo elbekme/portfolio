@@ -18,12 +18,12 @@ const UsersPage = () => {
       dataIndex: "name",
       key: "name",
     },
-    {
-      title: "Url",
-      dataIndex: "url",
-      key: "url",
-      render: (url) => <a target="_blank" rel="noreferrer" href={url}>{url}</a>
-    },
+    // {
+    //   title: "Url",
+    //   dataIndex: "url",
+    //   key: "url",
+    //   render: (url) => <a target="_blank" rel="noreferrer" href={url}>{url}</a>
+    // },
     {
         title: "Description",
         dataIndex: "description",
@@ -90,7 +90,7 @@ const UsersPage = () => {
       >
         <Form
           form={form}
-          name="portfolio"
+          name="user"
           labelCol={{
             span: 24,
           }}
@@ -103,24 +103,12 @@ const UsersPage = () => {
           autoComplete="off"
         >
           <Form.Item
-            label="Portfolio name"
+            label="User name"
             name="name"
             rules={[
               {
                 required: true,
                 message: "Please fill !",
-              },
-            ]}
-          >
-            <Input />
-          </Form.Item>
-          <Form.Item
-            label="Portfolio url"
-            name="url"
-            rules={[
-              {
-                required: true,
-                message: "Please fill!",
               },
             ]}
           >
