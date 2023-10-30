@@ -9,6 +9,8 @@ import {
   LogoutOutlined,
   TeamOutlined,
   ProfileOutlined,
+  BookOutlined,
+  ProjectOutlined
 } from "@ant-design/icons";
 
 import "./style.scss";
@@ -63,6 +65,16 @@ const AdminLayout = () => {
               key: "/portfolios",
               icon: <ProfileOutlined />,
               label: <Link to="/portfolios">Portfolios</Link>,
+            },
+            {
+              key: "/education",
+              icon: <BookOutlined />,
+              label: <Link to="/education">Education</Link>,
+            },
+            {
+              key: "/experiences",
+              icon: <ProjectOutlined />,
+              label: <Link to="/experiences">Experiences</Link>,
             },
             {
               icon: <LogoutOutlined />,

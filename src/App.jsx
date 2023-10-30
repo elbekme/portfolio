@@ -7,6 +7,8 @@ import DashboardPage from "./page/admin/DashboardPage"
 import SkillsPage from './page/admin/SkillsPage';
 import UsersPage from './page/admin/UsersPage';
 import PortfoliosPage from './page/admin/PortfoliosPage';
+import EducationPage from './page/admin/EducationPage';
+import ExperiencePage from './page/admin/ExperiencesPage';
 
 function App() {
   const { isAuthenticated } = useSelector((state) => state.auth);
@@ -20,6 +22,8 @@ function App() {
           <Route path="users" element={<UsersPage />} />
           <Route path="portfolios" element={<PortfoliosPage />} />
           <Route path="skills" element={<SkillsPage />} />
+          <Route path="education" element={<EducationPage/>} />
+          <Route path="experiences" element={<ExperiencePage/>} />
         </Route>
         ) : null}
         <Route path='*' element={<Navigate to="/" />}/>
