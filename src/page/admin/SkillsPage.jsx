@@ -1,17 +1,37 @@
-import { Fragment, useEffect } from "react"
-import { Table, Space, Button, Modal, Form, Input } from 'antd';
-import { addSkill, controlModal, editSkill, getSkill, getSkills, showModal, updateSkill,deleteSkill } from "../../redux/slices/skillSlice";
-import { useDispatch, useSelector } from "react-redux";
+import { Fragment, useState } from "react"
+import { Table, Space, Button, Modal, Form, Input, message, Pagination } from 'antd';
+
+import {
+  useGetSkillsQuery,
+  useGetSkillMutation,
+  useAddSkillMutation,
+  useUpdateSkillMutation,
+  useDeleteSkillMutation,
+} from '../../redux/services/skillService';
 
 const SkillsPage = () => {
-  const dispatch = useDispatch();
   const [form] = Form.useForm();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [page, setPage] = useState(1);
+  const [selected, setSelected] = useState(null);
 
-  const {skills, isModalOpen, selected, loading, btnLoading} = useSelector(state => state.skill);
+  const {data, isFetching, refetch} = useGetSkillsQuery(page);
 
-  useEffect(() => {
-    dispatch(getSkills());
-  },[dispatch])
+  const [getSkill] = useGetSkillMutation();
+  const [addSkill] = useAddSkillMutation();
+  const [updateSkill] = useUpdateSkillMutation();
+  const [deleteSkill] = useDeleteSkillMutation(); 
+
+  const openModal = () =>{
+    setIsModalOpen(true);
+    setSelected(null);
+    form.resetFields();
+  }
+  const closeModal = () =>{
+      setIsModalOpen(false);
+  }
+
+
 
   const columns = [
     {
@@ -29,18 +49,10 @@ const SkillsPage = () => {
       render: (_, row) => {
         return (
           <Space size="middle">
-            <Button type="primary" onClick={async () => { 
-              await dispatch(editSkill(row._id));
-              await dispatch(getSkills());
-            let {payload} = await dispatch(getSkill(row._id));
-            form.setFieldsValue(payload);
-            }}>
+            <Button type="primary" onClick={() => editSkill(row._id)}>
               Edit
             </Button>
-            <Button loading={btnLoading} danger type="primary" onClick={async () => {
-              await dispatch(deleteSkill(row._id))
-              await dispatch(getSkills());
-              }}>
+            <Button danger type="primary" onClick={async () => { await deleteSkill(row._id); refetch(); deleteSkillss}}>
               Delete
             </Button>
           </Space>
@@ -49,31 +61,44 @@ const SkillsPage = () => {
     },
   ];
 
-
-
-  const closeModal = () => {
-    dispatch(controlModal());
-  };
+  const deleteSkillss = () => {
+    message.success("success delete !");
+}
 
   const handleOk = async () => {
-    try{
+    try {
       let values = await form.validateFields();
+      values.photo = "6521485e1b06670014733226";
       if(selected === null){
-        await dispatch(addSkill(values));
-      }else{
-        await dispatch(updateSkill({id: selected, values}));
+        await addSkill(values);
+        message.success('success add !');
+      }else {
+        await updateSkill({id:selected,body: values});
+        message.success('success update !');
       }
       closeModal();
-      await dispatch(getSkills());
-    } catch(err) {
+      refetch();
+    }catch(err){
       console.log(err);
     }
   };
 
+  async function editSkill(id) {
+    try {
+      setSelected(id);
+      setIsModalOpen(true);
+      const { data } = await getSkill(id);
+      form.setFieldsValue(data);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+
   return (
     <Fragment>
     <Table
-        loading={loading}
+        loading={isFetching}
         bordered
         title={() => (
           <div
@@ -83,20 +108,23 @@ const SkillsPage = () => {
               alignItems: "center",
             }}
           >
-            <h1>Skills ({skills.length})</h1>
-            <Button onClick={() => dispatch(showModal(form))} type="primary">
+            <h1>Skills ({data?.pagination.total})</h1>
+            <Button onClick={openModal} type="primary">
               Add skill
             </Button>
           </div>
         )}
         columns={columns}
-        dataSource={skills}
+        dataSource={data?.data}
       />
+      <Pagination total={data?.pagination.total} current={page} onChange={(page) => {
+        setPage(page)
+      }}/>
       <Modal
         title="Category data"
         open={isModalOpen}
         onOk={handleOk}
-        confirmLoading={btnLoading}
+        // confirmLoading={btnLoading}
         onCancel={closeModal}
         okText={selected ? "Save skill" : "Add skill" }
       >

@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice, } from "@reduxjs/toolkit";
 import request from '../../server';
+
 const initialState = {
     skills: [],
     selected: null,
@@ -18,6 +19,8 @@ export const getSkills = createAsyncThunk('skill/getskills', async (_, {rejectWi
         return rejectWithValue(err);
     }
 });
+
+
 
 export const getSkill = createAsyncThunk('skill/getskill', async (action, {rejectWithValue} ) => {
     try{
@@ -61,17 +64,6 @@ export const deleteSkill = createAsyncThunk(
     }
 )
 
-// export const editSkill = createAsyncThunk(
-//     "skill/editSkill",
-//     async (action, {rejectWithValue}) => {
-//         try{
-//             await request.put(`skills/${action}`);
-//         }catch(err){
-//             return rejectWithValue(err);
-//         }
-//     }
-// )
-
 
 const skillSlice = createSlice({
     name:'skill',
@@ -85,32 +77,6 @@ const skillSlice = createSlice({
         controlModal (state){
             state.isModalOpen = !state.isModalOpen;
         },
-        // addSkill:{
-        //     reducer:(state, { payload }) => {
-        //         if(state.selected === null) {
-        //             state.skills.push(payload);
-        //         }else{
-        //             state.skills = state.skills.map(el => {
-        //                 if(el.id === state.selected){
-        //                     return payload;
-        //                 } else{
-        //                     return el;
-        //                 }
-        //             })
-        //         }
-        //     },
-        //     prepare: (data) => {
-        //         return {
-        //             payload: {
-        //                 ...data,
-        //                 id: nanoid(),
-        //             }
-        //         }
-        //     }
-        // },
-        // deleteSkill (state,{payload}){
-        //     state.skills = state.skills.filter((el) => el.id !== payload);
-        // },
         editSkill (state, { payload }){
             state.isModalOpen = true;
             state.selected = payload;
@@ -118,38 +84,6 @@ const skillSlice = createSlice({
         }
     },
 
-    // extraReducers: {
-    //     [getSkills.pending]: (state) => {
-    //         state.loading = true;
-    //     },
-    //     [getSkills.fulfilled]: (state, {payload}) => {
-    //         state.skills = payload.data;
-    //         state.total = payload.pagination.total;
-    //         state.loading = false;
-    //     },
-    //     [getSkills.rejected]: (state, {payload}) => {
-    //         state.error = payload;
-    //         state.loading = false;
-    //     },
-    //     [addSkill.pending]: (state) => {
-    //         state.btnLoading = true;
-    //     },
-    //     [addSkill.fulfilled]: (state) => {
-    //         state.btnLoading = false;
-    //     },
-    //     [addSkill.rejected]: (state) => {
-    //         state.btnLoading = false;
-    //     },
-    //     [deleteSkill.pending]: (state) => {
-    //         state.btnLoading = true;
-    //     },
-    //     [deleteSkill.fulfilled]: (state) => {
-    //         state.btnLoading = false;
-    //     },
-    //     [deleteSkill.rejected]: (state) => {
-    //         state.btnLoading = false;
-    //     },
-    // }
 
     extraReducers: (builder) => {
         builder.addCase(getSkills.pending, (state) => {
@@ -184,40 +118,6 @@ const skillSlice = createSlice({
         })
     },
 });
-
-
-// const skillReducer = createReducer(initialState, (builder) =>{
-//     builder.addCase(showModal, (state, {payload}) =>{
-//         state.isModalOpen = true;
-//         state.selected = null;
-//         payload.resetFields();
-//     }).
-//     addCase(controlModal, (state) => {
-//         state.isModalOpen = !state.isModalOpen;
-//     }).
-//     addCase(addSkill, (state, { payload }) => {
-//         if(state.selected === null) {
-//             state.skills.push(payload);
-//         }else{
-//             state.skills = state.skills.map(el => {
-//                 if(el.id === state.selected){
-//                     return payload;
-//                 } else{
-//                     return el;
-//                 }
-//             })
-//         }
-//     }).
-//     addCase(deleteSkill, (state,{payload}) => {
-//         state.skills = state.skills.filter((el) => el.id !== payload);
-//     }).
-//     addCase(editSkill, (state, { payload: {id,form} }) => {
-//         state.isModalOpen = true;
-//         let skill = state.skills.find((el) => el.id === id);
-//         state.selected = id;
-//         form.setFieldsValue(skill);
-//     })
-// });
 
 export const {showModal, controlModal, editSkill} = skillSlice.actions;
 

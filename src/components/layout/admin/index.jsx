@@ -78,7 +78,7 @@ const AdminLayout = () => {
             },
             {
               icon: <LogoutOutlined />,
-              label: <Button danger type="primary" onClick={logout}>Logaut</Button>,
+              label: <Button danger type="primary" onClick={logout}>Logout</Button>,
             },
           ]}
         />

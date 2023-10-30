@@ -11,7 +11,7 @@ export const experienceService = createApi({
     },
     }),
     endpoints: (builder) => ({
-        getEducations: builder.query({
+        getExperiences: builder.query({
             query: (page) => `experiences?page=${page}`,
             transformResponse: (res) => res,
         }),
@@ -46,7 +46,7 @@ export const experienceService = createApi({
 
 
 export const {
-    useGetEducationsQuery,
+    useGetExperiencesQuery,
     useGetEducationMutation,
     useAddEducationMutation,
     useUpdateEducationMutation,

@@ -43,7 +43,7 @@ const UsersPage = () => {
             <Button type="primary" onClick={() => editUser(row._id)}>
               Edit
             </Button>
-            <Button danger  type="primary" onClick={async () => { await deleteUser(row._id); refetch();deleteUserss}}>
+            <Button danger  type="primary" onClick={async () => { await deleteUser(row._id); refetch(); deleteUserss}}>
               Delete
             </Button>
           </Space>

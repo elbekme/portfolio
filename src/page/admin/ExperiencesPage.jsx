@@ -1,8 +1,8 @@
 import { Fragment, useState,   } from "react"
 import { Table, Space, Button, message, Modal, Form, Input, Pagination } from 'antd';
 
-import { 
-    useGetEducationsQuery,
+import {  
+    useGetExperiencesQuery,
     useGetEducationMutation,
     useAddEducationMutation,
     useUpdateEducationMutation,
@@ -14,7 +14,7 @@ const ExperiencePage = () => {
     const [page, setPage] = useState(1);
     const [selected, setSelected] = useState(null);
 
-    const {data, isFetching, refetch} = useGetEducationsQuery(page);
+    const {data, isFetching, refetch} = useGetExperiencesQuery(page);
 
     const [getPortfolio] = useGetEducationMutation();
     const [addPortfolio] = useAddEducationMutation();
