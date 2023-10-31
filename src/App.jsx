@@ -9,6 +9,7 @@ import UsersPage from './page/admin/UsersPage';
 import PortfoliosPage from './page/admin/PortfoliosPage';
 import EducationPage from './page/admin/EducationPage';
 import ExperiencePage from './page/admin/ExperiencesPage';
+import NotFoundPage from './page/admin/NotFoundPage';
 
 function App() {
   const { isAuthenticated } = useSelector((state) => state.auth);
@@ -26,7 +27,7 @@ function App() {
           <Route path="experiences" element={<ExperiencePage/>} />
         </Route>
         ) : null}
-        <Route path='*' element={<Navigate to="/" />}/>
+        <Route path='*' element={<NotFoundPage/>}/>
     </Routes>
   </BrowserRouter>
 }
