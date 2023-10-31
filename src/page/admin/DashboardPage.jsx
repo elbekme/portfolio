@@ -6,6 +6,7 @@ import { useGetExperiencesQuery } from "../../redux/services/experienceServices"
 import { useGetPortfoliosQuery } from "../../redux/services/portfolioService";
 import { useGetUsersQuery } from "../../redux/services/userService";
 import { useGetSkillsQuery } from "../../redux/services/skillService";
+import { useGetMessagesQuery } from "../../redux/services/messageService";
 
 const DashboardPage = () => {
   const [page, setPage] = useState(1);
@@ -13,12 +14,14 @@ const DashboardPage = () => {
   const [pagePortfolios, setPagePortfolios] = useState(1);
   const [pageUsers, setPageUsers] = useState(1);
   const [pageSkills, setPageSkills] = useState(1);
+  const [pageMessages, setPageMessage] = useState(1);
 
   const {data} = useGetEducationsQuery(page);
   const {data: dataExperience} = useGetExperiencesQuery(pageExperience);
   const {data: dataPortfolio} = useGetPortfoliosQuery(pagePortfolios);
   const {data: dataUser} = useGetUsersQuery(pageUsers);
   const {data: dataSkill} = useGetSkillsQuery(pageSkills);
+  const {data: dataMessage} = useGetMessagesQuery(pageMessages);
 
   const twoColors = { '0%': '#108ee9', '100%': '#87d068' };
 
@@ -39,6 +42,9 @@ const DashboardPage = () => {
         </Card>
         <Card title="Experience" bordered={false} style={{ width: 200 }}>
           <Progress type="circle" percent={dataExperience?.pagination.total} strokeColor={twoColors} />
+        </Card>
+        <Card title="Message" bordered={false} style={{ width: 200 }}>
+          <Progress type="circle" percent={dataMessage?.pagination.total} strokeColor={twoColors} />
         </Card>
       </Space>
   </div>

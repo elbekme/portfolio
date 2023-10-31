@@ -10,7 +10,8 @@ import {
   TeamOutlined,
   ProfileOutlined,
   BookOutlined,
-  ProjectOutlined
+  ProjectOutlined,
+  MessageOutlined
 } from "@ant-design/icons";
 
 import "./style.scss";
@@ -69,12 +70,17 @@ const AdminLayout = () => {
             {
               key: "/education",
               icon: <BookOutlined />,
-              label: <Link to="/education">Education</Link>,
+              label: <Link to="/education">Educations</Link>,
             },
             {
               key: "/experiences",
               icon: <ProjectOutlined />,
               label: <Link to="/experiences">Experiences</Link>,
+            },
+            {
+              key: "/message",
+              icon: <MessageOutlined />,
+              label: <Link to="/message">Messages</Link>,
             },
             {
               icon: <LogoutOutlined />,

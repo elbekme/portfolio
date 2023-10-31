@@ -8,6 +8,7 @@ import userReducer, { userService } from "../services/userService";
 import educationReducer, {educationService} from "../services/educationService";
 import experienceReducer, { experienceService } from "../services/experienceServices";
 import skillReducer, {skillService} from "../services/skillService";
+import messageReducer, { messageService } from "../services/messageService";
 
 const reducer = {
   auth: authReducer,
@@ -15,13 +16,16 @@ const reducer = {
   [userService.reducerPath]: userReducer,
   [educationService.reducerPath]: educationReducer,
   [experienceService.reducerPath]: experienceReducer,
-  [skillService.reducerPath]: skillReducer
+  [skillService.reducerPath]: skillReducer,
+  [messageService.reducerPath]: messageReducer,
 }
 
 export const Store = configureStore({reducer, 
   middleware:(getDefaultMiddleware) =>
   getDefaultMiddleware().concat(portfolioService.middleware)
-  .concat(userService.middleware).concat(educationService.middleware).concat(experienceService.middleware).concat(skillService.middleware)
+  .concat(userService.middleware).concat(educationService.middleware)
+  .concat(experienceService.middleware).concat(skillService.middleware)
+  .concat(messageService.middleware)
 });
 
 const StoreProvider = ({children}) => {
