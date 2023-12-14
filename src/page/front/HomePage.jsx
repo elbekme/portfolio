@@ -33,7 +33,7 @@ const HomePage = () => {
   return (
     <div className="container">
         <div className="home">
-            <h1>Hover Me</h1>
+            {/* <h1>Hover Me</h1> */}
                 <button onClick={login}>Login</button>
         </div>
     </div>

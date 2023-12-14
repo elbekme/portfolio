@@ -26,7 +26,7 @@ const { Header, Sider, Content } = Layout;
 const AdminLayout = () => {
   const location = useLocation();
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [collapsed, setCollapsed] = useState(false);
   const {
     token: { colorBgContainer },
@@ -35,7 +35,9 @@ const AdminLayout = () => {
   const logout = () => {
     Cookies.remove(TOKEN);
     dispatch(controlAuthenticated(false));
-    navigate('/');
+    // navigate('/');
+      window.location = 'https://client-portfolio-elbek.netlify.app';
+      return;
   }
 
   return (

@@ -24,22 +24,22 @@
             border: none;
             z-index: 1;
             cursor: pointer;
-            color: #fff;
+            color: #000;
         }
-        button::before{
-            content: '';
-        width: 0;
-        height: 100px;
-        position: absolute;
-        top: 0;
-        left: 0;
-        background: linear-gradient(45deg,#00ccff 0%,#0e1538 50%, #d400d4 100%);
-        transition: .5s ease-in;
-        display: block;
-        z-index: -1;
-    }
-    button:hover::before{
-        width:100%;
-    }
+    //     button::before{
+    //         content: '';
+    //     width: 0;
+    //     height: 100px;
+    //     position: absolute;
+    //     top: 0;
+    //     left: 0;
+    //     background: linear-gradient(45deg,#00ccff 0%,#0e1538 50%, #d400d4 100%);
+    //     transition: .5s ease-in;
+    //     display: block;
+    //     z-index: -1;
+    //     }
+    // button:hover::before{
+    //     width:100%;
+    // }
     }
 }
